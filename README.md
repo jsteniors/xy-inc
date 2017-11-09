@@ -7,7 +7,7 @@ Para buildar a aplicação:
 - Ter um banco de dados mysql
 
 Executar o gradle: ``` gradle build -x test ```
-Para o deploy basta colocar o arquivo gerado `xy-inc.war` no diretorio de deploy do sorvidor de aplicação(tomcat, glassfish, ect..)
+Para o deploy basta colocar o arquivo gerado em `build/libs/xy-inc.war` no diretorio de deploy do sorvidor de aplicação(tomcat, glassfish, ect..)
 
 Para criar o banco de dados basta executar o comando 
 ```sql 
