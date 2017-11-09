@@ -4,11 +4,6 @@
          id="WebApp_ID" version="3.0">
 
     <display-name>xy-inc</display-name>
-
-	
-    <listener>
-        <listener-class>com.jstenio.xy_inc.ws.GuiceContextListener</listener-class>
-    </listener>
     
     <filter>
         <filter-name>CorsFilter</filter-name>
@@ -42,16 +37,6 @@
     <filter-mapping>
         <filter-name>CorsFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter>
-        <filter-name>GuiceFilter</filter-name>
-        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>GuiceFilter</filter-name>
-        <url-pattern>/resources/*</url-pattern>
     </filter-mapping>
 
 </web-app>
