@@ -1,27 +1,21 @@
 package com.jstenio.xy_inc.ws.model;
 
-import java.util.Optional;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
 
 @Entity
-@Table(name="poi_")
-@NamedQueries({
-	@NamedQuery(name="poiByDistance", query="SELECT poi FROM POI poi WHERE SQRT((poi.x-:pX)*(poi.x-:pX)+(poi.y-:pY)*(poi.y-:pY))<=:pDistance"),
-	@NamedQuery(name="equalPoi", query="SELECT poi FROM POI poi WHERE poi=:pPoi")
-})
+@Table(name="poi_", uniqueConstraints=@UniqueConstraint(columnNames= {"name", "x_", "y_"}))
+@NamedQuery(name="poiByDistance", query="SELECT poi FROM POI poi WHERE SQRT((poi.x-:pX)*(poi.x-:pX)+(poi.y-:pY)*(poi.y-:pY))<=:pDistance")
 public class POI {
 	
 	@Id @GeneratedValue
 	private Integer id;
-//	@Column(name="name_")
 	private String name;
 	@Min(value=0, message = "Coordenada nao pode ser negativa")
 	@Column(name="x_")

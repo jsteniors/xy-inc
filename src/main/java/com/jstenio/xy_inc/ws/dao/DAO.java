@@ -1,10 +1,10 @@
 package com.jstenio.xy_inc.ws.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -26,6 +26,19 @@ public class DAO<T> {
         manager.getTransaction().commit();
         manager.close();
     }
+	
+	public void insertMany(List<T> entities){
+        EntityManager manager = JPAUtil.getEntityManager();
+        manager.getTransaction().begin();
+        try {
+        	Optional.ofNullable(entities).ifPresent(ent->ent.forEach(e->manager.persist(e)));
+        }catch (Exception e) {
+			return;
+		}
+        manager.getTransaction().commit();
+        manager.close();
+    }
+
     public List<T> listAll(){
         EntityManager manager = JPAUtil.getEntityManager();
         CriteriaQuery<T> query = manager.getCriteriaBuilder().createQuery(classe);
@@ -59,7 +72,7 @@ public class DAO<T> {
     }
     public List<T> listByQuery(String queryName,List<Parameter> params){
         EntityManager manager = JPAUtil.getEntityManager();
-        Query query = manager.createNamedQuery(queryName);
+        TypedQuery<T> query = manager.createNamedQuery(queryName, classe);
         for(Parameter param:params){
         	if(!param.isStringConcat())
         		query.setParameter(param.getKey(), param.getValue());
