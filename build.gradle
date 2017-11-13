@@ -5,6 +5,7 @@ apply plugin: 'java'
 apply plugin: 'war'
 
 war.archiveName = 'xy-inc.war'
+war.destinationDir = new File('war')
 
 // In this section you declare where to find the dependencies of your project
 repositories {
